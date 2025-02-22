@@ -1,0 +1,221 @@
+body {  
+    margin: 0;  
+    padding: 0;  
+    font-family: 'Roboto', sans-serif;  
+    background-color: rgb(238, 230, 230);  
+    color: #333;  
+}  
+
+.contain {  
+    height: 750px;  
+    position: relative;  
+    background-size: cover;  
+    background-position: center;  
+    background-repeat: no-repeat;  
+    z-index: 1;  
+    border-radius: 15px;  
+    overflow: hidden;  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+}  
+
+#backgroundCarrousel {  
+    transition: background-image 0.5s ease-in-out;  
+    border-radius: 15px; /* Arrondi aux coins */  
+}  
+
+header {  
+    height: 100px;  
+    width: 90%;  
+    margin: 20px auto; 
+    margin-right:90px; 
+    border-radius: 0 0 20px 20px;  
+    background-color: transparent;  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+    display: flex;  
+    align-items: center;  
+    padding: 0 20px;  
+    position: relative;  
+    z-index: 2;  
+    margin-bottom: 600px;
+    position: fixed; /* Fixe la position en haut de la page */
+}  
+
+h2 {  
+    margin: 0;  
+    font-size: 3em;  
+    flex-grow: 1;  
+    font-family: 'Pacifico', cursive;  
+    background: linear-gradient(45deg, #D24D57, #FF6F61);  
+    -webkit-background-clip: text;  
+    -webkit-text-fill-color: transparent;  
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  
+    animation: float 3s ease-in-out infinite;  
+}  
+
+@keyframes float {  
+    0%, 100% {  
+        transform: translateY(0);  
+    }  
+    50% {  
+        transform: translateY(-5px);  
+    }  
+}  
+
+nav {  
+    display: flex;  
+    align-items: center;  
+    justify-content: space-between;  
+    width: 100%;  
+}  
+
+nav ul {  
+    display: flex;  
+    align-items: center;  
+    list-style-type: none;  
+    margin: 0;  
+    padding: 0;  
+}  
+
+nav ul li {  
+    margin: 0 15px;  
+}  
+
+nav ul li a {  
+    text-decoration: none;  
+    color: white;  
+    font-size: 1.2em;  
+    padding: 8px 15px;  
+    border-radius: 5px;  
+    transition: background-color 0.3s, color 0.3s;  
+}  
+
+nav ul li a:hover {  
+    background-color: #D24D57;  
+    color: white;  
+}  
+
+.menu-container {  
+    position: relative;  
+}  
+
+.hamburger {  
+    font-size: 40px;  
+    cursor: pointer;  
+    color: red;  
+    height: 50px;  
+    transition: transform 0.3s ease;  
+    position: relative;  
+}  
+
+.hamburger:hover {  
+    transform: scale(1.1);  
+    color: rgb(231, 74, 74);  
+}  
+
+.hamburger::after {  
+    content: "S'authentifier";  
+    position: absolute;  
+    top: 100%;  
+    left: 50%;  
+    transform: translateX(-50%);  
+    background-color:rgb(228, 134, 12) ;  
+    color: #fff;  
+    padding: 5px 10px;  
+    border-radius: 5px;  
+    font-size: 0.8em;  
+    white-space: nowrap;  
+    opacity: 0;  
+    visibility: hidden;  
+    transition: opacity 0.3s ease, visibility 0.3s ease;  
+}  
+
+.hamburger:hover::after {  
+    opacity: 1;  
+    visibility: visible;  
+}  
+
+#modal {  
+    display: none;  
+    position: fixed;  
+    z-index: 999;  
+    left: 0;  
+    top: 0;  
+    width: 100%;  
+    height: 100%;  
+    background-color: rgba(0, 0, 0, 0.7);  
+    justify-content: center;  
+    align-items: center;  
+    transition: opacity 0.3s ease;  
+    border-radius: 10px; /* coins arrondis pour le modale */  
+}  
+
+#menu {  
+    background-color: rgb(243, 169, 169);  
+    border-radius: 5px;  
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);  
+    opacity: 0;  
+    transform: translateY(-10px);  
+    transition: opacity 0.3s ease, transform 0.3s ease;  
+    display: flex;  
+    flex-direction: column;  
+    padding: 20px;  
+}  
+
+#menu.show {  
+    display: flex;  
+    opacity: 1;  
+    transform: translateY(0);  
+}  
+
+.dropdown-item {  
+    padding: 10px 15px;  
+    transition: background-color 0.3s ease;  
+    color: #333;  
+    text-align: center;  
+    border-radius: 5px; /* coins arrondis des items du menu */  
+}  
+
+.dropdown-item:hover {  
+    background-color: #D24D57;  
+    color: white;  
+}  
+
+#message {  
+    position: absolute;  
+    bottom: 20px;  
+    left: 20px;  
+    color: white;  
+    font-size: 1.5em;  
+    background-color: rgba(255, 99, 71, 0.8); /* Couleur de fond */  
+    padding: 20px; /* Ajout de padding */  
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Bordure */  
+    border-radius: 10px; /* Coins arrondis du message */  
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Ombre */  
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Animation */  
+    opacity: 0; /* Démarre avec une transparence */  
+}  
+
+#message.show {  
+    opacity: 1; /* Rend visible avec animation */  
+    transform: translateY(10px); /* Déplacement vers le haut */  
+}  
+.content {
+   display: flex;
+   gap: 15px;
+   justify-content: center;
+   margin-bottom: 150px; /* Ajuster la distance sous les boutons */
+}
+
+.btn-red-light {
+   background-color: #ff6b6b;
+   color: white;
+   transition: all 0.3s ease-in-out;
+}
+
+.btn-red-light:hover {
+   background-color: #ff5252;
+   transform: scale(1.1);
+} 
