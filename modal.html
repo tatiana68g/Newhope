@@ -1,0 +1,36 @@
+<!-- Bouton pour ouvrir la modal -->
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ 
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#downloadModal">  
+    Télécharger  
+  </button>  
+  
+  <!-- Modal -->  
+  <div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">  
+    <div class="modal-dialog">  
+      <div class="modal-content">  
+        <div class="modal-header">  
+          <h5 class="modal-title" id="downloadModalLabel">Téléchargement</h5>  
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>  
+        </div>  
+        <div class="modal-body">  
+          Êtes-vous sûr de vouloir télécharger ce fichier ?  
+        </div>  
+        <div class="modal-footer">  
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>  
+          <a href="chemin/vers/votre/fichier.zip" class="btn btn-primary">Télécharger</a>  
+        </div>  
+      </div>  
+    </div>  
+  </div>
+     
+</body>
+</html>
