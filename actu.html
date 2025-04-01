@@ -1,0 +1,102 @@
+<!DOCTYPE html>  
+<html lang="fr">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Défilement des Actualités</title>  
+    <link rel="stylesheet" href="styles.css">  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            background-color: #f8f8f8; /* Couleur de fond douce pour le contraste */  
+            margin: 0; /* Suppression des marges par défaut */  
+            padding: 20px; /* Ajout de marge intérieure */  
+        }  
+
+        .news-container {  
+            width: 100%;  
+            overflow: hidden;  
+            white-space: nowrap;  
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Ombre plus marquée */  
+            background-color: none; /* Couleur du fond des actualités */  
+            border-radius: 10px; /* Coins arrondis du conteneur */  
+            position: relative; /* Positionnement relatif pour l'animation */  
+            animation: scroll 20s linear infinite; /* Animation de défilement */  
+            display: flex; /* Utilisation de Flexbox pour séparer les articles */  
+            gap: 10px; /* Espace entre les articles */  
+        }  
+
+        .news-item {  
+            flex: 0 0 400px; /* Largeur fixe de 400px pour chaque article */  
+            padding: 15px; /* Espacement interne */  
+            border-radius: 10px; /* Coins arrondis des éléments */  
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Ombre des articles */  
+            background-color: #f5dcdc; /* Couleur différente pour chaque article */  
+            height: 250px; /* Hauteur fixe pour chaque actualité */  
+            overflow: hidden; /* Masquer le contenu dépassant de la zone */  
+            display: flex; /* Utilisation de Flexbox pour la disposition du contenu */  
+            flex-direction: column; /* Disposition verticale du contenu */  
+            justify-content: space-between; /* Espacement entre les éléments */  
+        }  
+
+        .news-image {  
+            border-radius: 10px; /* Coins arrondis pour l'image */  
+            width: 100%; /* Image prend toute la largeur de l'article */  
+            height: 150px; /* Hauteur fixe pour l'image */  
+            object-fit: cover; /* Maintenir le rapport d'aspect de l'image */  
+        }  
+
+        h2, h3 {  
+            margin: 5px; /* Ajustement des marges des titres */  
+            font-size: 1em; /* Taille de police réduite pour les paragraphes */  
+        }  
+
+        p {  
+            margin: 5px 0; /* Ajustement des marges des paragraphes */  
+            font-size: 0.9em; /* Taille de police réduite pour les paragraphes */  
+            color: #333; /* Couleur de texte standard */  
+        }  
+
+        @keyframes scroll {  
+            0% { transform: translateX(100%); }  
+            100% { transform: translateX(-100%); }  
+        }  
+        .decouvre {  
+            color: #160000;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="news-container">  
+        <div class="news-item" id="news1">  
+            <a href="https://www.tf1info.fr/sante/la-solitude-isolement-social-un-probleme-de-sante-publique-mondial-selon-l-oms-2276456.html"><img src="solitude.jpg" alt="Actualité 1" class="news-image"></a>  
+            <div>  
+                <h2>Alerte de Solitude ou d'Isolement Social</h2>  
+                <p><span class="decouvre">Découvrez :</span> des problématiques croissantes,<br> touchant un nombre significatif d'individus<br> à travers différentes tranches d'âge...</p>  
+            </div>  
+        </div>  
+
+        <div class="news-item" id="news2">  
+            <img src="aces.jpg" alt="Actualité 2" class="news-image">  
+            <div>  
+                <h3>Accès aux soins de santé</h3>  
+                <p><span class="decouvre">Découvrez :</span> L'accès aux soins de santé reste inégal,<br> avec de nombreux enfants dans les régions<br> rurales ou en situation de précarité n'étant pas<br> en mesure d'obtenir des soins médicaux adaptés.</p>  
+            </div>  
+        </div>  
+
+        <div class="news-item" id="news3">  
+            <img src="healht.jpg" alt="Actualité 3" class="news-image">  
+            <div>  
+                <h3>Santé des Enfants</h3>  
+                <p><span class="decouvre">Découvrez :</span> La santé des enfants est un enjeu<br> crucial à l'échelle mondiale, surtout dans un<br> contexte où de nombreux défis persistent.</p>  
+            </div>  
+        </div>  
+    </div>  
+
+    <script>  
+        const newsItems = document.querySelectorAll('.news-item');  
+        const totalWidth = Array.from(newsItems).reduce((total, item) => total + item.offsetWidth, 0);  
+        document.querySelector('.news-container').style.width = `${totalWidth}px`;  
+    </script>  
+</body>  
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=add" />
+    <title>Document</title>
+</head>
+<style>
+    body {  
+    font-family: 'Arial', sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    background-color: #f0f4f8;  
+    color: #333;  
+}  
+
+header {  
+    background-color: #e90b0b;  
+    color: white;  
+    padding: 20px;  
+    text-align: center;  
+}  
+
+header h1 {  
+    margin: 0;  
+    font-size: 2.5em;  
+}  
+
+
+header p {  
+    font-size: 1.5em;  
+    color:#333
+}  
+p{
+    font-size: 1.5em;  
+    color:#333
+}
+.container {  
+    max-width: 1200px;  
+    margin: 20px auto;  
+    padding: 10px;  
+    display: flex;  
+    flex-wrap: wrap;  /* Permet d'enrouler les enfants à la ligne suivante */  
+    gap: 20px;  /* Espace entre les articles */  
+}  
+
+.article {  
+    background: white;  
+    border-radius: 8px;  
+    padding: 20px;  
+    flex: 1 1 calc(33% - 40px);  /* Ajuste la taille de l'article à 33% (avec espacement) */  
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);  
+    transition: transform 0.2s, box-shadow 0.2s;  
+}  
+
+.article:hover {  
+    transform: scale(1.03);  
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);  
+}  
+
+.article img {  
+    max-width: 100%;  
+    border-radius: 8px;  
+} 
+.article:last-child img {  
+    margin-left: 100px; /* Valeur de votre choix */  
+}  
+.article h2 {  
+    font-size: 1.8em;  
+    margin: 10px 0;  
+}  
+
+.article p {  
+    font-size: 1em;  
+    line-height: 1.5;  
+}  
+
+footer {  
+    text-align: center;  
+    padding: 20px;  
+    background-color: #e90b0b;
+    color: white;  
+}
+/* Stylisation spécifique au lien "Lire la suite" */  
+.read-more {  
+    display: inline-block; /* Pour que le lien se comporte comme un bouton */  
+    margin-top: 15px; /* Espacement au-dessus du lien */  
+    background-color: #f7401f; /* Couleur de fond */  
+    color: white; /* Couleur du texte */  
+    padding: 10px 20px; /* Espacement interne : haut/bas, gauche/droite */  
+    border-radius: 5px; /* Coins arrondis */  
+    text-decoration: none; /* Supprime le soulignement */  
+    font-weight: bold; /* Met le texte en gras */  
+    font-size: 1em; /* Taille de la police */  
+    transition: background-color 0.3s, transform 0.3s; /* Ajoute une transition douce pour le survol */  
+}  
+
+/* Effet de survol du lien "Lire la suite" */  
+.read-more:hover {  
+    background-color: transparent; /* Changement de couleur au survol */  
+    color: black;
+    transform: scale(1.05); /* Légère augmentation de la taille au survol */  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombre au survol pour un effet de profondeur */  
+}
+.p{
+    color: white;
+}
+
+.material-symbols-outlined {
+  font-size: 1em;
+  margin-top: 5px;
+
+}
+
+</style>
+<body>
+    
+    <header>  
+        <h1>Actualités sur la Santé Mondiale</h1>  
+        <p>Restez informé sur les collaborations et initiatives pour améliorer la santé globale.</p>  
+    </header>  
+    <div class="container" id="articles"></div>  
+    <footer>  
+        <p class="p">&copy; 2025 Santé Mondiale. Tous droits réservés.</p>  
+    </footer>  
+    <script>
+       fetch('actualites.json')  
+  .then(response => {  
+    if (!response.ok) {  
+      throw new Error('Erreur réseau : ' + response.status);  
+    }  
+    return response.json();  
+  })  
+  .then(data => {  
+    console.log('Contenu du JSON chargé :', data);  
+    const articlesContainer = document.getElementById('articles');  
+    
+    if (data && data.partenaires) {  
+      data.partenaires.forEach(article => {  
+        const articleElement = document.createElement('div');  
+        articleElement.classList.add('article');  
+        articleElement.innerHTML = `  
+          <h2>${article.titre}</h2>  
+          <img src="${article.image}" alt="${article.titre}">  
+          <p>${article.description}</p>  
+          <p><strong>Date:</strong> ${article.date}</p>  
+          <p><strong>Source:</strong> ${article.source}</p>  
+          <a href="${article.url}" target="_blank" class="read-more">
+             Lire <span class="material-symbols-outlined">add</span> </a>  
+        `;  
+        articlesContainer.appendChild(articleElement);  
+      });  
+    } else {  
+      console.error('Aucune donnée trouvée pour partenaires');  
+    }  
+  })  
+  .catch(error => console.error('Erreur de chargement des articles:', error));
+</script>      
+
+</body>
+</html>

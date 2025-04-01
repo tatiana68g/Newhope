@@ -1,0 +1,167 @@
+<!DOCTYPE html>  
+<html lang="fr">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Rapports sur la santé mondiale</title>  
+    <style>  
+     /* Style général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    background-color: #f51818;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer {
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Conteneur des rapports */
+#reports-container {
+    max-width: 1400px;
+    /* margin-left: 150px auto; */
+    /* padding: 0 20px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Chaque rapport */
+.report {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 90%;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    height: auto;
+    margin-left: 200px ;
+}
+
+.report:hover {
+    transform: translateY(-5px); /* Effet de survol */
+}
+
+/* Image dans le rapport */
+.report-image {
+    max-width: 70%;
+    height: auto;
+    border-radius: 40px;
+    margin-bottom: 15px;
+    margin-left: 150px;
+}
+
+/* Titre du rapport */
+.report h3 {
+    font-size: 1.2em;
+    margin: 0 0 10px;
+}
+
+.report a {
+    color: #0077b6;
+    text-decoration: none;
+}
+
+.report a:hover {
+    text-decoration: underline;
+}
+
+/* Texte du rapport */
+.report p {
+    margin: 5px 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .report {
+        width: 100%;
+    }
+
+    #reports-container {
+        padding: 0;
+    }
+}
+
+    </style>  
+</head>  
+<body>   
+        <header>  
+            <h1>Rapports de Santé</h1>  
+        </header>  
+        <main>  
+            <div id="reports-container"></div> <!-- Conteneur pour afficher les rapports -->  
+        </main>  
+        <br><br>
+        <br><br>
+        <footer>  
+            <p>&copy; 2025 Organisation Mondiale de la Santé. Tous droits réservés.</p>  
+        </footer>  
+    
+      
+<script >// Fonction pour afficher les rapports de santé sur la page  
+    function displayReports(reports) {
+        const container = document.getElementById('reports-container');
+        container.innerHTML = ''; // Vider le conteneur avant d'ajouter les nouveaux rapports
+    
+        if (reports.length === 0) {
+            container.innerHTML = '<p>Aucun rapport disponible.</p>'; // Message si aucun rapport
+        }
+    
+        reports.forEach(report => {
+            const reportDiv = document.createElement('div'); // Créer un nouvel élément div pour chaque rapport
+            reportDiv.className = 'report'; // Ajouter une classe pour le style (optionnel)
+    
+            // Vous pouvez ajouter une URL d'image par rapport dans votre JSON (par exemple report.image_url)
+            const imageHTML = report.image_url ? `<img src="${report.image_url}" alt="${report.title}" class="report-image">` : '';
+    
+            reportDiv.innerHTML = `
+                ${imageHTML}
+                <h3><a href="${report.url}" target="_blank">${report.title}</a></h3>
+                <p>${report.description}</p>
+                <p><strong>Auteur :</strong> ${report.author}</p>
+                <p><strong>Date de publication :</strong> ${report.published_date}</p>
+                
+            `;
+            container.appendChild(reportDiv); // Ajouter le nouvel élément au conteneur
+        });
+    }
+    
+    // Chargement du JSON depuis le fichier actualites.json et appel de la fonction d'affichage
+    fetch('actualites.json')
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.health_reports) {
+                displayReports(data.health_reports);
+            } else {
+                console.error('Données invalides dans le fichier JSON.');
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors du chargement des données JSON:', error);
+            const container = document.getElementById('reports-container');
+            container.innerHTML = '<p>Erreur lors du chargement des rapports. Veuillez réessayer plus tard.</p>';
+        });
+    
+    // Appeler la fonction pour afficher les rapports lorsque la page est chargée
+    window.onload = function() {
+        // Le JSON serait déjà chargé par le fetch
+    };
+</script>  
+</body>  
+</html>

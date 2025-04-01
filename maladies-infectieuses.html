@@ -1,0 +1,151 @@
+<!DOCTYPE html>  
+<html lang="fr">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Maladies Infectieuses</title>  
+    <link rel="stylesheet" href="style.css"> <!-- Lien vers le fichier CSS -->  
+    <style>  
+         
+   
+        body {  
+    font-family: Arial, sans-serif;  
+    background-color: #f4f4f4;  
+    padding: 20px;  
+    line-height: 1.6; /* Améliore la lisibilité */  
+}  
+
+h1 {  
+    color: #ee0f0f;  
+    text-align: center; /* Centre le titre */  
+    margin-bottom: 20px; /* Espacement en bas du titre */ 
+    font-size: 2em; 
+}  
+
+#news-container {  
+    display: flex;  
+    flex-direction: column;  
+    gap: 16px;  
+     width: 1400px;
+    overflow-x: hidden;
+    margin-left: 100px;
+}  
+
+.article {  
+    background-color: #fff;  
+    border-radius: 8px;  
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
+    transition: transform 0.2s;  
+    padding: 16px;  
+    text-align: left; /* Aligner le texte à gauche pour une meilleure lisibilité */  
+}  
+/* body{
+    width: 100%;
+    overflow-x: hidden;
+} */
+.article:hover {  
+    transform: scale(1.02);  
+}  
+
+.article-content {  
+    text-align: center; /* Centre le contenu */  
+    
+}
+
+
+.description {  
+    font-size: 16px; /* Ajustez la taille de la police */  
+    line-height: 1.5; /* Améliore la lisibilité */  
+    margin: 15px 0; /* Ajoute de l'espace entre les paragraphes */  
+}  
+
+/* Optionnel : Baissez la taille de police pour les écrans plus petits */  
+@media (max-width: 768px) {  
+    .description {  
+        font-size: 14px; /* Tirez sur la taille de la police pour les petits écrans */  
+    }  
+}   
+
+.article-image {  
+    display: block;  
+    margin: 10px auto; /* Centre horizontalement avec marge */  
+    max-width: 60%; /* Limite la largeur */  
+    height: auto; /* Ajuste la hauteur automatiquement */  
+    border-radius: 50px; /* Ajout d'un léger arrondi aux bords */  
+}  
+
+h3 {  
+    font-size: 1.5em; /* Taille du titre d'article */  
+    color: #0056b3; /* Changez la couleur selon votre thème */  
+    margin: 10px 0; /* Espacement autour du titre */  
+}  
+
+p {  
+    font-size: 1em; /* Taille de police pour le corps du texte */  
+    color: #555; /* Couleur du texte */  
+    margin: 10px 0; /* Espacement autour du texte */  
+}  
+
+a {  
+    text-decoration: none;  
+    color: #96c9ff; 
+    font-size: 1.5em; 
+}  
+
+a:hover {  
+    text-decoration: underline; /* Style au survol */  
+}
+
+    </style>  
+</head> 
+
+<body> 
+   
+
+    <h1>Actualités sur les Maladies Infectieuses</h1>  
+    <div id="news-container"></div>  
+    <a href="Menu.php">Retour à l'accueil</a>  
+
+    <script>
+        // Fonction pour obtenir des actualités à partir du fichier JSON local  
+async function fetchNews(topic) {  
+    try {  
+        const response = await fetch('actualites.json');  
+        const data = await response.json();  
+
+        if (data[topic]) {  
+            displayNews(data[topic]);  
+        } else {  
+            document.getElementById('news-container').innerHTML = '<p>Aucune actualité trouvée.</p>';  
+        }  
+    } catch (error) {  
+        console.error('Erreur lors de la récupération des actualités:', error);  
+        document.getElementById('news-container').innerHTML = '<p>Erreur de chargement des actualités.</p>';  
+    }  
+}  
+
+// Fonction pour afficher les actualités sur la page  
+function displayNews(articles) {  
+    const container = document.getElementById('news-container');  
+    container.innerHTML = ''; // Vider le conteneur avant d'ajouter les nouvelles  
+    articles.forEach(article => {  
+        const articleDiv = document.createElement('div');  
+        articleDiv.className = 'article';  
+        articleDiv.innerHTML = `  
+            <div class="article-content">  
+                <img src="${article.image}" alt="${article.title}" class="article-image">  
+                <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>  
+                <p>${article.description}</p>  
+            </div>  
+        `;  
+        container.appendChild(articleDiv);  
+    });  
+}  
+
+// Chargement d'actualités uniquement pour la page maladies-infectieuses  
+window.onload = function() {  
+    fetchNews('maladies_infectieuses'); // Chargement des actualités directement pour cette page  
+};
+    </script>
+</body>  
+</html>

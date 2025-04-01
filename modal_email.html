@@ -1,0 +1,33 @@
+<!-- Modal de confirmation pour l'envoi du mail -->
+<div class="modal fade" id="confirmRejetModal" tabindex="-1" aria-labelledby="confirmRejetLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmRejetLabel">Confirmer le rejet</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Voulez-vous envoyer un mail au demandeur pour l'informer du rejet ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <a id="sendMailBtn" href="#" class="btn btn-danger">Envoyer le mail</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Fonction pour ouvrir le modal et préparer le lien mailto
+    function openRejetModal(email, nom) {
+        let mailtoLink = `mailto:${email}?subject=Rejet de votre demande&body=Bonjour ${nom},%0D%0A%0D%0A
+        Nous vous informons que votre demande d'aide a été rejetée.%0D%0A
+        Pour toute question, n'hésitez pas à nous contacter.%0D%0A%0D%0A
+        Cordialement,%0D%0A
+        L'équipe NewHope.`;
+        
+        document.getElementById('sendMailBtn').href = mailtoLink;
+        var myModal = new bootstrap.Modal(document.getElementById('confirmRejetModal'));
+        myModal.show();
+    }
+</script>
